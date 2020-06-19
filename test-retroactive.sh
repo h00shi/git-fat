@@ -1,5 +1,7 @@
 #!/bin/sh -ex
 
+export PATH="${PWD}:${PATH}"
+
 fullpath() { echo "`pwd`/$1"; }
 
 git init retro
@@ -25,12 +27,12 @@ git add .gitattributes
 git checkout .
 git commit -am'Import big files into git-fat'
 
-#git log --stat
+git --no-pager log --stat --decorate=short
 
 git fat find 10000 | awk '{print $1}' > fat-files
 git filter-branch --index-filter "git fat index-filter $(fullpath fat-files) --manage-gitattributes" --tag-name-filter cat -- --all
 
-#git log --stat
+git --no-pager log --stat  --decorate=short
 git checkout HEAD^
 rm *
 git checkout .
