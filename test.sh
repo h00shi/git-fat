@@ -2,12 +2,18 @@
 # Any copyright is dedicated to the Public Domain.
 # http://creativecommons.org/publicdomain/zero/1.0/
 
+# Note: this test needs ssh connection to self.
+
+export PATH="${PWD}:${PATH}"
+
 # Clear out repos and fat store from prior test runs
 rm -fR fat-test fat-test2 /tmp/fat-store
 
 git init fat-test
 cd fat-test
 git fat init
+# If you add localhost: then it tries to use ssh.
+# Then you would need ssh host configured on your machine.
 cat - >> .gitfat <<EOF
 [rsync]
 remote = localhost:/tmp/fat-store
