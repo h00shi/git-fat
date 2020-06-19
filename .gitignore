@@ -4,3 +4,5 @@ fat-test*/
 /retro-clone/
 /retro-store/
 /retro
+__pycache__
+*.pyc
